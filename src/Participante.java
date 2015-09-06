@@ -1,5 +1,3 @@
-package SorteoDeTaquillas;
-
 public class Participante {
 	
 	private String nombre;

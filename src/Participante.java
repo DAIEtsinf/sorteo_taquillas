@@ -65,22 +65,6 @@ public class Participante {
 	public String toString (){
 		return "Nombre: " + getNombre() + ", DNI: " + getDNI();	
 	}
-<<<<<<< HEAD
-	//p.equals(p1)
-	public boolean equals (Participante p1){
-		boolean res = false;
-		
-		System.out.println("ESTOS SON LOS NOMBRES QUE TIENE EQUALS");
-		System.out.print(this.getNombre() + this.getDNI() + "\t");
-		System.out.println(p1.getNombre() + p1.getDNI());
-		
-		if (this.getNombre().equals(p1.getNombre()) || this.getDNI().equals(p1.getDNI())){
-			res = true;
-			System.out.println("SON: " + res);
-		}
-
-		return res;
-=======
 	
         /**
          * Método que permite comprar los participantes. Compara los DNI, 
@@ -97,7 +81,6 @@ public class Participante {
                 //Caso en que un DNI contiene letra y el otro no
                 
 		return false;
->>>>>>> cc6fdf91e100b6d65846e704635c2cd234ce4e6c
 	}
 }
 

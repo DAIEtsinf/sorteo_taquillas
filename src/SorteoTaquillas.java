@@ -6,12 +6,15 @@ import java.util.Scanner;
 public class SorteoTaquillas {
 
 	static Participante[] listaParticipantes = new Participante[200];
-	private static int numPart = 0;
+	static Participante[] listaDAI = new Participante[100];
+	private static int numPart = 0, numDAI = 0;
 
 	public static void main(String[] args) throws Exception {
-		for (int i = 0; i < listaParticipantes.length; i++) {
+		for (int i = 0; i < listaParticipantes.length; i++)
 			listaParticipantes[i] = null;
-		}
+		
+		for (int i = 0; i < listaDAI.length; i++)
+			listaDAI[i] = null;
 
 		// Leer el fichero de los participantes y de los miembros de la DAI y
 		// hacer una lista de los participantes
@@ -24,8 +27,8 @@ public class SorteoTaquillas {
 			System.out
 					.println("¿En qué fichero se encuentran los nombres de los participantes? (Dirección/nombrearchivo.txt)");
 			nombreFich = kbd.next();
-			listaNombre = new Scanner(new File(nombreFich));
-			listaNombreDAI = new Scanner(new File("AlumnosDAI.txt"));
+			listaNombre = new Scanner(new File("files/" + nombreFich));
+			listaNombreDAI = new Scanner(new File("files/AlumnosDAI.txt"));
 
 			System.out.println("\nLOS PARTICIPANTES LEIDOS SON:");
 
@@ -37,6 +40,13 @@ public class SorteoTaquillas {
 				System.out.println(listaParticipantes[numPart].toString());
 				numPart++;
 			}
+			
+			while (listaNombreDAI.hasNext()) {
+
+				listaDAI[numDAI] = new Participante(
+						listaNombreDAI.nextLine());
+				numDAI++;
+			}
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Este fichero no existe, inténtelo de nuevo.\n");
@@ -45,9 +55,13 @@ public class SorteoTaquillas {
 			listaNombreDAI.close();
 		}
 
-		// QUITAR DUPLICADOS
+		// Quitar duplicados
+		System.out.println("DUPLICADOS");
 		comprobarRepetidos();
-		// QUITAR DAI
+		
+		// Quitar DAI
+		System.out.println("\nDAI");
+		comprobarDAI();
 
 		// Realizar sorteo
 		Participante[] listaSorteo = randomize(listaParticipantes);
@@ -56,8 +70,10 @@ public class SorteoTaquillas {
 		System.out.println("\nEL RESULTADO ES:");
 
 		for (int i = 0; i < listaSorteo.length; i++){
-			if (listaSorteo [i] != null)
-			System.out.println(listaSorteo[i].toString());
+			if (listaSorteo [i] != null){
+				if (!listaSorteo[i].getNombre().equals("null"))
+				System.out.println(listaSorteo[i].toString());
+			}
 		}
 
 		// DOLORES DE LA RUBIA RODRIGUEZ, 30533829H
@@ -97,12 +113,8 @@ public class SorteoTaquillas {
 			throws Exception {
 		Participante[] copia = new Participante[numPart];
 
-		System.out.println("\nLOS PARTICIPANTES COPIADOS SON:");
-
 		for (int j = 0; j < copia.length; j++) {
-			copia[j] = new Participante(orig[j].getNombre().concat(
-					"," + orig[j].getDNI()));
-			System.out.println(copia[j].toString());
+			copia[j] = new Participante(orig[j].getNombre().concat("," + orig[j].getDNI()));
 		}
 		return copia;
 	}
@@ -114,6 +126,19 @@ public class SorteoTaquillas {
 				for (int j = i + 1; j < listaParticipantes.length; j++) {
 					if (listaParticipantes[j] != null) {
 						if (listaParticipantes[i].equals(listaParticipantes[j]))
+							listaParticipantes[j] = new Participante("null, null");
+					}
+				}
+			}
+		}
+	}
+	
+	private static void comprobarDAI () throws Exception{
+		for (int i = 0; i < listaDAI.length; i++){
+			if (listaDAI[i] != null) {
+				for (int j = 0; j < listaParticipantes.length; j++){
+					if (listaParticipantes[j] != null) {
+						if (listaParticipantes[j].equals(listaDAI[i]))
 							listaParticipantes[j] = new Participante("null, null");
 					}
 				}

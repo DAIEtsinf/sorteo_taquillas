@@ -35,6 +35,7 @@ public class Participante {
 		
 		if (this.getNombre().equals(p1.getNombre()) || this.getDNI().equals(p1.getDNI())){
 			res = true;
+			System.out.println("SON: " + res);
 		}
 
 		return res;

@@ -65,14 +65,15 @@ public class Participante {
 	}
 	
         /**
-         * Método que permite comprar los participantes. Compara los nombres y
-         * los DNI, también tiene en cuenta el caso en que haya un DNI con letra
-         * y un DNI sin letra.
+         * Método que permite comprar los participantes. Compara los DNI, 
+         * también tiene en cuenta el caso en que haya un DNI con letra y un DNI
+         * sin letra. No se comparar los nombres puesto que puede haber dos
+         * personas con el mismo nombre.
          * @param p participante con el que comparamos
          * @return boleean que representa si dos participantes son iguales.
          */
 	public boolean equals (Participante p){	
-		if(this.getNombre().equals(p.getNombre())) return true;
+		//if(this.getNombre().equals(p.getNombre())) return true;
                 if(this.getDNI().equals(p.getDNI())) return true;
                 
                 //Caso en que un DNI contiene letra y el otro no

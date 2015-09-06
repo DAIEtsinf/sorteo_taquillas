@@ -5,8 +5,8 @@ public class Participante {
 	
 	public Participante (String linea) throws Exception{
 	
-		this.nombre = linea.substring(0, linea.indexOf(","));
-		this.DNI = setDNI(linea.substring(linea.indexOf(",") + 1));
+		this.nombre = linea.substring(0, linea.indexOf(",")).trim().trim();
+		this.DNI = setDNI(linea.substring(linea.indexOf(",") + 1)).trim().trim();
 	}
 
 	public String setDNI(String dni)throws Exception{
@@ -33,9 +33,10 @@ public class Participante {
 		System.out.print(this.getNombre() + this.getDNI() + "\t");
 		System.out.println(p1.getNombre() + p1.getDNI());
 		
-		if (this.getNombre() == p1.getNombre() && this.getDNI() == p1.getDNI())
+		if (this.getNombre().equals(p1.getNombre()) || this.getDNI().equals(p1.getDNI())){
 			res = true;
-		System.out.println("Son iguales" + res);
+		}
+
 		return res;
 	}
 }

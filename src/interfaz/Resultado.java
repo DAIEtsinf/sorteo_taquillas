@@ -9,10 +9,6 @@ import java.util.Iterator;
 import lib.MList;
 import logica.Persona;
 
-/**
- *
- * @author Oscar
- */
 public class Resultado extends javax.swing.JFrame {
 
     /**

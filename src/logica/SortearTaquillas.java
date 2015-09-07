@@ -7,23 +7,38 @@ import java.io.IOException;
 import lib.MArrayList;
 import lib.MList;
 
+/**
+ * Clase que representa el sorteo de taquillas.
+ */
 public class SortearTaquillas {
-
+    //Listas utilizadas para el sorteo
     private MList<Persona> listaPersonas, listaDAI;
 
+    /**
+     * Constructor de la clase.
+     */
     public SortearTaquillas() {
         this.listaPersonas = new MArrayList<Persona>();
         this.listaDAI = new MArrayList<Persona>();
     }
 
-    public MList sortear(String archivoPersonas, String archivoDAI) throws LogicalException {
-        //Leemos los archivos
-        leerArchivos(archivoPersonas, archivoDAI);
+    /**
+     * Metodo principal de la clase. Este metodo lee los archivos, rellenando
+     * las listas y opera con ellas para eliminar duplicados y los miembros de
+     * la delegacion de alumnos de los posibles ganadores.
+     * @param archivoParticipantes String que representa la ruta del archivo de participantes.
+     * @param archivoMiembrosDAI
+     * @return
+     * @throws LogicalException 
+     */
+    public MList sortear(String archivoParticipantes, String archivoMiembrosDAI) throws LogicalException {
+        //Leemos los archivos y rellenamos las listas
+        leerArchivos(archivoParticipantes, archivoMiembrosDAI);
 
-        //Comprobamos que no hay duplicados
+        //Eliminamos los duplicados
         listaPersonas = listaPersonas.removeDuplicates();
 
-        //Comprobamos que no hay miembros de la DAI entre los participantes
+        //Eliminamos los miembros de la DAI de los participantes
         listaPersonas = listaPersonas.removeElements(listaDAI);
         
         //Realizamos el sorteo
@@ -31,9 +46,15 @@ public class SortearTaquillas {
     }
     
     
-    private void leerArchivos(String archivoPersonas, String archivoDAI) throws LogicalException {
-        archivoPersonas = "files\\Nombres.txt";
-        archivoDAI = "files\\AlumnosDAI.txt";
+    /**
+     * Metodo que lee los archivos y rellena las listas.
+     * @param archivoParticipantes String que representa la ruta del archivo de los participantes.
+     * @param archivoMiembrosDAI String que representa la ruta del archivo de los miembros de la DAI.
+     * @throws LogicalException Excepcion lanzada cuando se intenta crear una persona a partir de los archivos de forma erronea.
+     */
+    private void leerArchivos(String archivoParticipantes, String archivoMiembrosDAI) throws LogicalException {
+        archivoParticipantes = "files\\Nombres.txt";
+        archivoMiembrosDAI = "files\\AlumnosDAI.txt";
 
         try {
             FileReader fr = null;
@@ -42,14 +63,13 @@ public class SortearTaquillas {
             //Leemos los participantes
             try {
 
-                fr = new FileReader(new File(archivoPersonas));
-
+                fr = new FileReader(new File(archivoParticipantes));
                 br = new BufferedReader(fr);
 
                 String linea;
-                while ((linea = br.readLine()) != null) {
+                while ((linea = br.readLine()) != null) 
                     listaPersonas.add(new Persona(linea));
-                }
+                
             } finally {
                 if (br != null) {
                     br.close();
@@ -62,13 +82,13 @@ public class SortearTaquillas {
             //Leemos los miembros de la Delegacion de Alumnos de Informatica
             try {
 
-                fr = new FileReader(new File(archivoDAI));
+                fr = new FileReader(new File(archivoMiembrosDAI));
                 br = new BufferedReader(fr);
 
                 String linea;
-                while ((linea = br.readLine()) != null) {
+                while ((linea = br.readLine()) != null)
                     listaDAI.add(new Persona(linea));
-                }
+                
             } finally {
                 if (br != null) {
                     br.close();
@@ -80,6 +100,5 @@ public class SortearTaquillas {
         } catch (IOException ex) {
             throw new LogicalException(ex.getMessage());
         }
-
     }
 }

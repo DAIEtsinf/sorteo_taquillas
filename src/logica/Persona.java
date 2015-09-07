@@ -1,9 +1,7 @@
 package logica;
 
 /**
- * Clase que representa a los alumnos que participan en el sorteo
- *
- * @author Oscar
+ * Clase que representa a los alumnos que participan en el sorteo.
  */
 public class Persona {
 
@@ -14,8 +12,8 @@ public class Persona {
 
     /**
      * Constructor de la clase Persona.
-     * @param nombre
-     * @param dni 
+     * @param nombre String que representa el nombre de la persona.
+     * @param dni String que representa el dni de la persona.
      */
     public Persona(String nombre, String dni){
         setNombre(nombre);
@@ -26,7 +24,8 @@ public class Persona {
      * Constructor de la clase Persona.
      *
      * @param txt debe de tener el formato "nombre, DNI"
-     * @throws Exception
+     * @throws logica.LogicalException Excepcion lanzada si el parametro de
+     * entrada no contiene comas.
      */
     public Persona(String txt) throws LogicalException {
         if (!txt.contains(",")) {
@@ -41,7 +40,7 @@ public class Persona {
     /**
      * Método para guardar el nombre del Persona.
      *
-     * @param nombre
+     * @param nombre String que representa el nuevo nombre de la persona.
      */
     private void setNombre(String nombre) {
         while (nombre.charAt(0) == ' ' || nombre.charAt(nombre.length()-1) == ' ')
@@ -54,8 +53,7 @@ public class Persona {
      * añadir restricciones, ya que algunos estudiantes de intercambio no tienen
      * DNI y suelen utilizar pasaporte u otros identificadores.
      *
-     * @param dni
-     * @throws Exception
+     * @param dni String que representa el nuevo DNI de la persona.
      */
     private void setDNI(String dni){
         while (dni.charAt(0) == ' ' || dni.charAt(dni.length()-1) == ' ') 
@@ -87,30 +85,32 @@ public class Persona {
      *
      * @return String con el formato "Nombre: "+nombre+", DNI: "+dni
      */
+    @Override
     public String toString() {
         return "Nombre: " + getNombre() + ", DNI: " + getDNI();
     }
 
     /**
-     * Método que permite comprar los participantes. Compara los DNI, también
-     * tiene en cuenta el caso en que haya un DNI con letra y un DNI sin letra.
-     * No se comparar los nombres puesto que puede haber dos personas con el
+     * Método que permite comprar las personas. No se comparar los nombres
+     * puesto que puede haber dos personas con el mismo nombre. Se intenta tener
+     * en cuenta el caso en que una persona primero se anyada con dni sin letra
+     * y despues se anyada con dni con letra, se reconoce siempre que tenga el
      * mismo nombre.
      *
-     * @param p participante con el que comparamos
-     * @return boleean que representa si dos participantes son iguales.
+     * @param p personas con la que comparamos
+     * @return boleean que representa si dos personas son la misma.
      */
     public boolean equals(Persona p) {
         if(p == null)return false;
         
         //if(this.getNombre().equals(p.getNombre())) return true;
-        if (this.getDNI().equals(p.getDNI())) {
+        if (this.getDNI().toUpperCase().equals(p.getDNI().toUpperCase())) {
             return true;
         }
 
         //Caso en que dos personas se llamen igual y una contenga el DNI de otra
         //Seguramente han añadido el DNI sin la letra y después la han puesto
-        if(this.nombre.equals(p.getNombre()) && this.getDNI().contains(p.getDNI()))
+        if(this.nombre.toUpperCase().equals(p.getNombre().toUpperCase()) && this.getDNI().toUpperCase().contains(p.getDNI().toUpperCase()))
             return true;
         
         return false;

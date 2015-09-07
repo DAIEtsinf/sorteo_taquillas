@@ -32,8 +32,8 @@ public class SortearTaquillas {
     
     
     private void leerArchivos(String archivoPersonas, String archivoDAI) throws LogicalException {
-        archivoPersonas = "C:\\Users\\Oscar\\git\\sorteo_taquillas\\files\\Nombres.txt";
-        archivoDAI = "C:\\Users\\Oscar\\git\\sorteo_taquillas\\files\\AlumnosDAI.txt";
+        archivoPersonas = "files\\Nombres.txt";
+        archivoDAI = "files\\AlumnosDAI.txt";
 
         try {
             FileReader fr = null;

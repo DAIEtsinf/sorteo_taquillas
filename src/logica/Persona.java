@@ -95,23 +95,34 @@ public class Persona {
      * puesto que puede haber dos personas con el mismo nombre. Se intenta tener
      * en cuenta el caso en que una persona primero se anyada con dni sin letra
      * y despues se anyada con dni con letra, se reconoce siempre que tenga el
-     * mismo nombre.
+     * mismo nombre. Si el parametro de entrada no es de la clase Persona se
+     * devuelve false.
      *
-     * @param p personas con la que comparamos
+     * @param o personas con la que comparamos.
      * @return boleean que representa si dos personas son la misma.
      */
-    public boolean equals(Persona p) {
+    @Override
+    public boolean equals(Object o) {
+        if(!o.getClass().toString().
+                equals("class logica.Persona"))return false;
+        Persona p = (Persona)o;
         if(p == null)return false;
+        
+        if(this.getNombre().contains("Jose An")&& p.getNombre().contains("Jose An"))
+            System.out.println("yo: "+this.toString()+"\n el: "+p.toString());
         
         //if(this.getNombre().equals(p.getNombre())) return true;
         if (this.getDNI().toUpperCase().equals(p.getDNI().toUpperCase())) {
+            System.out.println(this.toString());
             return true;
         }
 
         //Caso en que dos personas se llamen igual y una contenga el DNI de otra
         //Seguramente han añadido el DNI sin la letra y después la han puesto
-        if(this.nombre.toUpperCase().equals(p.getNombre().toUpperCase()) && this.getDNI().toUpperCase().contains(p.getDNI().toUpperCase()))
+        if(this.nombre.toUpperCase().equals(p.getNombre().toUpperCase()) && this.getDNI().toUpperCase().contains(p.getDNI().toUpperCase())){
+            System.out.println(this.toString());
             return true;
+        }
         
         return false;
     }

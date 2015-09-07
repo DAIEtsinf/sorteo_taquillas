@@ -107,22 +107,15 @@ public class Persona {
                 equals("class logica.Persona"))return false;
         Persona p = (Persona)o;
         if(p == null)return false;
-        
-        if(this.getNombre().contains("Jose An")&& p.getNombre().contains("Jose An"))
-            System.out.println("yo: "+this.toString()+"\n el: "+p.toString());
-        
+      
         //if(this.getNombre().equals(p.getNombre())) return true;
-        if (this.getDNI().toUpperCase().equals(p.getDNI().toUpperCase())) {
-            System.out.println(this.toString());
+        if (this.getDNI().toUpperCase().equals(p.getDNI().toUpperCase()))
             return true;
-        }
 
         //Caso en que dos personas se llamen igual y una contenga el DNI de otra
         //Seguramente han añadido el DNI sin la letra y después la han puesto
-        if(this.nombre.toUpperCase().equals(p.getNombre().toUpperCase()) && this.getDNI().toUpperCase().contains(p.getDNI().toUpperCase())){
-            System.out.println(this.toString());
+        if(this.nombre.toUpperCase().equals(p.getNombre().toUpperCase()) && this.getDNI().toUpperCase().contains(p.getDNI().toUpperCase()))
             return true;
-        }
         
         return false;
     }

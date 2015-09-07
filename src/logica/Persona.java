@@ -108,7 +108,11 @@ public class Persona {
             return true;
         }
 
-                //Caso en que un DNI contiene letra y el otro no
+        //Caso en que dos personas se llamen igual y una contenga el DNI de otra
+        //Seguramente han añadido el DNI sin la letra y después la han puesto
+        if(this.nombre.equals(p.getNombre()) && this.getDNI().contains(p.getDNI()))
+            return true;
+        
         return false;
     }
 }

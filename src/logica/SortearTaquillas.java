@@ -53,9 +53,6 @@ public class SortearTaquillas {
      * @throws LogicalException Excepcion lanzada cuando se intenta crear una persona a partir de los archivos de forma erronea.
      */
     private void leerArchivos(String archivoParticipantes, String archivoMiembrosDAI) throws LogicalException {
-        archivoParticipantes = "files\\Nombres.txt";
-        archivoMiembrosDAI = "files\\AlumnosDAI.txt";
-
         try {
             FileReader fr = null;
             BufferedReader br = null;
